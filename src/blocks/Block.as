@@ -77,7 +77,8 @@ public class Block extends Sprite {
 
 	// Blocking operations
 	public var isRequester:Boolean = false;
-	public var requestState:int = 0;		// 0 - no request made, 1 - awaiting response, 2 - data ready
+	public var forcedRequester:Boolean = false; // We've forced requester-like treatment on a non-requester block.
+	public var requestState:int = 0;        // 0 - no request made, 1 - awaiting response, 2 - data ready
 	public var response:* = null;
 	public var requestLoader:URLLoader = null;
 
@@ -526,6 +527,7 @@ public class Block extends Sprite {
 		if (op == 'whenClicked') newSpec = forStage ? 'when Stage clicked' : 'when this sprite clicked';
 		var dup:Block = new Block(newSpec, type, (int)(forClone ? -1 : base.color), op);
 		dup.isRequester = isRequester;
+		dup.forcedRequester = forcedRequester;
 		dup.parameterNames = parameterNames;
 		dup.defaultArgValues = defaultArgValues;
 		dup.warpProcFlag = warpProcFlag;
